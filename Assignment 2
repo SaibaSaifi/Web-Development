@@ -1,0 +1,373 @@
+#1. To create a menu  catalog of restaurant  using XML file. 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<MenuCatalog>
+    <!-- Indian Cuisine -->
+    <Item>
+        <RollNo>1</RollNo>
+        <Cuisine>Indian</Cuisine>
+        <DishName>Paneer Butter Masala</DishName>
+        <Veg>Veg</Veg>
+        <Price>10.99</Price>
+    </Item>
+
+    <Item>
+        <RollNo>2</RollNo>
+        <Cuisine>Indian</Cuisine>
+        <DishName>Chicken Biryani</DishName>
+        <Veg>Non-Veg</Veg>
+        <Price>12.99</Price>
+    </Item>
+    <Item>
+        <RollNo>3</RollNo>
+        <Cuisine>Indian</Cuisine>
+        <DishName>Chicken Korma</DishName>
+        <Veg>Non-Veg</Veg>
+        <Price>14</Price>
+    </Item>
+  <Item>
+        <RollNo>4</RollNo>
+        <Cuisine>Indian</Cuisine>
+        <DishName>veg Biryani</DishName>
+        <Veg>Non-Veg</Veg>
+        <Price>10</Price>
+    </Item>
+    </Item>
+    <Item>
+        <RollNo>5</RollNo>
+        <Cuisine>Indian</Cuisine>
+        <DishName>Soya Chaap</DishName>
+        <Veg>Veg</Veg>
+        <Price>10</Price>
+    </Item>
+    <!-- Continental Cuisine -->
+    <Item>
+        <RollNo>6</RollNo>
+        <Cuisine>Continental</Cuisine>
+        <DishName>Spaghetti Carbonara</DishName>
+        <Veg>Non-Veg</Veg>
+        <Price>14.99</Price>
+    </Item>
+
+    <Item>
+        <RollNo>7</RollNo>
+        <Cuisine>Continental</Cuisine>
+        <DishName>Chicken Alfredo</DishName>
+        <Veg>Non-Veg</Veg>
+        <Price>16.99</Price>
+    </Item>
+
+    <!-- Chinese Cuisine -->
+    <Item>
+        <RollNo>8</RollNo>
+        <Cuisine>Chinese</Cuisine>
+        <DishName>Sweet and Sour Chicken</DishName>
+        <Veg>Non-Veg</Veg>
+        <Price>11.99</Price>
+    </Item>
+
+    <Item>
+        <RollNo>9</RollNo>
+        <Cuisine>Chinese</Cuisine>
+        <DishName>Vegetable Spring Rolls</DishName>
+        <Veg>Veg</Veg>
+        <Price>8.99</Price>
+    </Item>
+    <Item>
+        <RollNo>10</RollNo>
+        <Cuisine>Chinese</Cuisine>
+        <DishName>Vegetable Momos</DishName>
+        <Veg>Veg</Veg>
+        <Price>8.99</Price>
+    </Item>
+</MenuCatalog>
+
+#2-. To create external style sheet and using the style sheet in xml file for above restaurant_menu  
+
+/* Style for the MenuCatalog */
+MenuCatalog {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+}
+
+/* Style for the Item */
+Item {
+    display: block;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Style for RollNo */
+RollNo {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Style for Cuisine */
+Cuisine {
+    font-style: italic;
+    color: #28a745;
+}
+
+/* Style for DishName */
+DishName {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+}
+
+/* Style for Price */
+Price {
+    color: #dc3545;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#3-To create a xsl style sheet to display the data in the xml using html table.
+
+#menu.xsl:
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <xsl:template match="/">
+        <html>
+            <head>
+                <title>Restaurant Menu</title>
+                <style>
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-top: 20px;
+                    }
+
+                    th, td {
+                        border: 1px solid #ddd;
+                        padding: 8px;
+                        text-align: left;
+                    }
+
+                    th {
+                        background-color: #f2f2f2;
+                    }
+                </style>
+            </head>
+            <body>
+                <h2>Restaurant Menu</h2>
+                <table>
+                    <tr>
+                        <th>Roll No</th>
+                        <th>Cuisine</th>
+                        <th>Dish Name</th>
+                        <th>Price</th>
+                    </tr>
+                    <xsl:apply-templates select="//Item"/>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+
+    <xsl:template match="Item">
+        <tr>
+            <td><xsl:value-of select="RollNo"/></td>
+            <td><xsl:value-of select="Cuisine"/></td>
+            <td><xsl:value-of select="DishName"/></td>
+            <td><xsl:value-of select="Price"/></td>
+        </tr>
+    </xsl:template>
+
+</xsl:stylesheet>
+
+#menu.xml:
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="menu.xsl"?>
+
+<MenuCatalog>
+    <!-- Your XML data here -->
+</MenuCatalog>
+
+
+
+
+#4-To create an html page to change the background color for every click of a button using javascript. 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Background Color</title>
+    <style>
+        body {
+            transition: background-color 0.5s;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body onclick="random_color()">
+
+    <h2>Click me to change the background color!</h2>
+    
+    <button onclick="random_color()">Change Color</button>
+
+    <script>
+        function random_color() {
+            // Generate random RGB values
+            var red = Math.floor(Math.random() * 256);
+            var green = Math.floor(Math.random() * 256);
+            var blue = Math.floor(Math.random() * 256);
+
+            // Set the background color
+            document.body.style.backgroundColor = `rgb(${red},${green},${blue})`;
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+#5-To create a html registration form and to validate the form using javascript code
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form with Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: none;
+        }
+
+        .error {
+            color: #dc3545;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Registration Form</h2>
+
+    <form id="registrationForm" onsubmit="return false;">
+        <table>
+            <tr>
+                <th>Name:</th>
+                <td><input type="text" id="name" name="name" oninput="check()" required></td>
+            </tr>
+            <tr>
+                <th>Age:</th>
+                <td><input type="number" id="age" name="age" oninput="check()" required></td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td><input type="email" id="email" name="email" oninput="check()" required></td>
+            </tr>
+            <tr>
+                <th>Phone No:</th>
+                <td><input type="tel" id="phone" name="phone" oninput="check()" required></td>
+            </tr>
+            <tr>
+                <th>Gender:</th>
+                <td>
+                    <label><input type="radio" name="gender" value="male" oninput="check()"> Male</label>
+                    <label><input type="radio" name="gender" value="female" oninput="check()"> Female</label>
+                </td>
+            </tr>
+            <tr>
+                <th>Hobbies:</th>
+                <td>
+                    <label><input type="checkbox" name="hobby" value="reading" oninput="check()"> Reading</label>
+                    <label><input type="checkbox" name="hobby" value="sports" oninput="check()"> Sports</label>
+                    <label><input type="checkbox" name="hobby" value="music" oninput="check()"> Music</label>
+                </td>
+            </tr>
+        </table>
+
+        <button type="button" onclick="reset()">Reset</button>
+        <button type="submit" id="submitButton">Submit</button>
+    </form>
+
+    <script>
+        function reset() {
+            document.getElementById('registrationForm').reset();
+            document.getElementById('submitButton').style.display = 'none';
+        }
+
+        function check() {
+            var name = document.getElementById('name').value;
+            var age = document.getElementById('age').value;
+            var email = document.getElementById('email').value;
+            var phone = document.getElementById('phone').value;
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var hobbies = document.querySelectorAll('input[name="hobby"]:checked');
+
+            if (name && age && email && phone && gender && hobbies.length > 0) {
+                document.getElementById('submitButton').style.display = 'inline-block';
+            } else {
+                document.getElementById('submitButton').style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+
+
